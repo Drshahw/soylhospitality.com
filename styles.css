@@ -9,7 +9,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background-image: url('background.png'); /* Use your background image */
+    background-image: url('background.png'); /* Background image */
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -46,22 +46,17 @@ body {
     margin: 15px 0;
 }
 
-/* Call-to-Action Button */
-.cta-button {
+/* Menu Button */
+.menu-button {
     margin: 20px 0;
-    padding: 15px 30px;
-    background-color: #fff;
-    color: #6a4535;
-    border: 2px solid #6a4535;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: bold;
+    max-width: 200px; /* Adjust the size as needed */
+    cursor: pointer;
+    transition: transform 0.2s ease; /* Smooth zoom effect */
 }
 
-.cta-button:hover {
-    background-color: #6a4535;
-    color: #fff;
+.menu-button:hover {
+    content: url('menu-button-hover.png'); /* Swap to hover image */
+    transform: scale(1.1); /* Slight zoom effect */
 }
 
 /* Icons */
