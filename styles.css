@@ -67,10 +67,10 @@ body {
 }
 
 .icons img {
-    width: 40px; /* Adjust size as needed */
-    height: 40px;
-    cursor: pointer;
-    transition: transform 0.2s ease; /* Smooth hover effect */
+    width: 60px; /* Increase width */
+    height: 60px; /* Increase height */
+    cursor: pointer; /* Makes the icons look clickable */
+    transition: transform 0.2s ease; /* Smooth animation for hover effect */
 }
 
 .icons img:hover {
