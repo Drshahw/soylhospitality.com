@@ -341,7 +341,7 @@ export default function Home() {
               rel="noreferrer"
               aria-label="Reserve a table on WhatsApp"
               data-analytics="reservation_click"
-              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#dedcd3] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0e0e0e] transition hover:-translate-y-0.5 hover:bg-[#466e8b] hover:text-[#dedcd3]"
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#466e8b] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#dedcd3] shadow-[0_8px_24px_rgb(70_110_139/22%)] transition hover:-translate-y-0.5 hover:bg-[#6d452a]"
             >
               <MessageCircle aria-hidden="true" size={17} strokeWidth={1.8} />
               <span>Reserve via WhatsApp</span>
