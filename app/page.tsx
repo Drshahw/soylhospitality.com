@@ -2,7 +2,7 @@ import { Navigation } from "@/components/navigation";
 import { events } from "@/content/events";
 import { featuredFood } from "@/content/featured-food";
 import { restaurant } from "@/content/restaurant";
-import { ArrowUpRight, Camera, MapPin, MessageCircle, Phone, Utensils } from "lucide-react";
+import { ArrowUpRight, Camera, MapPin, MessageCircle, Phone, Star, Utensils } from "lucide-react";
 
 const sectionLabel = (number: string, label: string) => (
   <div className="mb-8 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-black/55">
@@ -286,6 +286,25 @@ export default function Home() {
               <span className="inline-flex items-center gap-3">
                 <Camera aria-hidden="true" size={17} strokeWidth={1.7} />
                 Find us on Instagram
+              </span>
+              <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} />
+            </a>
+            <a
+              href={restaurant.reviewHref}
+              target="_blank"
+              rel="noreferrer"
+              data-analytics="review_click"
+              className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#a24a24]"
+            >
+              <span className="inline-flex items-center gap-3">
+                <Star
+                  aria-hidden="true"
+                  className="text-[#a24a24]"
+                  fill="currentColor"
+                  size={17}
+                  strokeWidth={1.7}
+                />
+                Leave a Google review
               </span>
               <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} />
             </a>
