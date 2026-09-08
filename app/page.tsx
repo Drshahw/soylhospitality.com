@@ -3,6 +3,7 @@ import { events } from "@/content/events";
 import { featuredFood } from "@/content/featured-food";
 import { restaurant } from "@/content/restaurant";
 import { ArrowUpRight, Camera, MapPin, MessageCircle, Phone, Star, Utensils } from "lucide-react";
+import Image from "next/image";
 
 const sectionLabel = (number: string, label: string) => (
   <div className="mb-8 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-black/55">
@@ -64,11 +65,13 @@ export default function Home() {
             </div>
           </div>
           <div className="relative min-h-[350px] overflow-hidden rounded-[1.5rem] bg-black sm:min-h-[620px] lg:min-h-[720px] lg:rounded-[2rem]">
-            <img
-              src="/images/hero-team.jpeg"
+            <Image
+              src="/images/hero-team.webp"
               alt="A smiling SOYL team member holding a freshly prepared dish"
-              className="absolute inset-0 h-full w-full object-cover object-center"
-              fetchPriority="high"
+              fill
+              preload
+              sizes="(max-width: 1023px) 100vw, 55vw"
+              className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white sm:bottom-7 sm:left-7 sm:right-7">
@@ -153,10 +156,12 @@ export default function Home() {
                   key={item.number}
                   className="group relative min-h-[390px] overflow-hidden rounded-[1.5rem] bg-black text-white sm:min-h-[480px]"
                 >
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.alt}
-                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 639px) 100vw, 50vw"
+                    className="object-cover transition duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
                   <div className="absolute inset-x-5 bottom-5 sm:inset-x-7 sm:bottom-7">
@@ -188,32 +193,38 @@ export default function Home() {
                 </p>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
-                <figure className="sm:col-span-2">
-                  <img
-                    src="/images/space-dining-room.jpeg"
+                <figure className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] sm:col-span-2">
+                  <Image
+                    src="/images/space-dining-room.webp"
                     alt="SOYL dining room with its central olive tree and patterned seating"
-                    className="aspect-[16/10] w-full rounded-[1.5rem] object-cover"
+                    fill
+                    sizes="(max-width: 639px) 100vw, 75vw"
+                    className="object-cover"
                   />
                   <figcaption className="mt-3 flex justify-between text-[10px] uppercase tracking-[0.18em] text-black/50">
                     <span>Rooted in SOYL</span>
                     <span>Dubai Design District</span>
                   </figcaption>
                 </figure>
-                <figure>
-                  <img
-                    src="/images/space-olive-tree-night.jpeg"
+                <figure className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem]">
+                  <Image
+                    src="/images/space-olive-tree-night.webp"
                     alt="SOYL's central olive tree beside the open kitchen at night"
-                    className="aspect-[4/5] w-full rounded-[1.5rem] object-cover"
+                    fill
+                    sizes="(max-width: 639px) 100vw, 50vw"
+                    className="object-cover"
                   />
                   <figcaption className="mt-3 text-[10px] uppercase tracking-[0.18em] text-black/50">
                     Take your time
                   </figcaption>
                 </figure>
-                <figure className="sm:pt-20">
-                  <img
-                    src="/images/space-lanterns.jpeg"
+                <figure className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] sm:pt-20">
+                  <Image
+                    src="/images/space-lanterns.webp"
                     alt="Decorative lanterns and a traditional coffee service inside SOYL"
-                    className="aspect-[4/5] w-full rounded-[1.5rem] object-cover"
+                    fill
+                    sizes="(max-width: 639px) 100vw, 50vw"
+                    className="object-cover"
                   />
                   <figcaption className="mt-3 text-[10px] uppercase tracking-[0.18em] text-black/50">
                     Stay for the details

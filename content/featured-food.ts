@@ -4,7 +4,7 @@ export const featuredFood = [
     label: "Fire",
     title: "From the kitchen",
     text: "Smoke, warmth, and a little bit of theatre. Follow the glow and let the appetite lead.",
-    image: "/images/fire-kitchen.jpeg",
+    image: "/images/fire-kitchen.webp",
     alt: "Fire glowing inside the SOYL kitchen oven",
   },
   {
@@ -12,7 +12,7 @@ export const featuredFood = [
     label: "Detail",
     title: "Stay for the details",
     text: "From the first pour to the last plate, every small thing is part of the table.",
-    image: "/images/coffee-detail.jpeg",
+    image: "/images/coffee-detail.webp",
     alt: "Coffee served with SOYL lettering in the foam",
   },
 ] as const;
