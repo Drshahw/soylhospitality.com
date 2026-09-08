@@ -2,6 +2,7 @@ import { Navigation } from "@/components/navigation";
 import { events } from "@/content/events";
 import { featuredFood } from "@/content/featured-food";
 import { restaurant } from "@/content/restaurant";
+import { ArrowUpRight, Camera, MapPin, MessageCircle, Phone, Utensils } from "lucide-react";
 
 const sectionLabel = (number: string, label: string) => (
   <div className="mb-8 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-black/55">
@@ -40,19 +41,25 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href={restaurant.bookingHref}
+                target="_blank"
+                rel="noreferrer"
                 data-analytics="reservation_click"
-                className="rounded-full bg-[#0e0e0e] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-transform hover:-translate-y-0.5"
+                aria-label="Reserve a table on WhatsApp"
+                className="inline-flex items-center gap-2 rounded-full bg-[#466e8b] px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#dedcd3] shadow-[0_8px_24px_rgb(70_110_139/20%)] transition hover:-translate-y-0.5 hover:bg-[#6d452a]"
               >
-                Reserve via WhatsApp ↗
+                <MessageCircle aria-hidden="true" size={17} strokeWidth={1.8} />
+                <span>Reserve via WhatsApp</span>
+                <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
               </a>
               <a
                 href={restaurant.menuHref}
                 target="_blank"
                 rel="noreferrer"
                 data-analytics="menu_click"
-                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8 transition-colors hover:text-black"
+                className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8 transition-colors hover:text-black"
               >
-                View menu ↗
+                <span>View menu</span>
+                <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
               </a>
             </div>
           </div>
@@ -133,9 +140,11 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 data-analytics="menu_click"
-                className="mt-8 inline-block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8"
+                className="mt-8 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8"
               >
-                See the full menu ↗
+                <Utensils aria-hidden="true" size={15} strokeWidth={1.7} />
+                <span>See the full menu</span>
+                <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
               </a>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -237,15 +246,21 @@ export default function Home() {
               data-analytics="directions_click"
               className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#466e8b]"
             >
-              <span>Get directions</span>
-              <span>↗</span>
+              <span className="inline-flex items-center gap-3">
+                <MapPin aria-hidden="true" size={17} strokeWidth={1.7} />
+                Get directions
+              </span>
+              <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} />
             </a>
             <a
               href={restaurant.phoneHref}
               data-analytics="call_click"
               className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#466e8b]"
             >
-              <span>Call to book</span>
+              <span className="inline-flex items-center gap-3">
+                <Phone aria-hidden="true" size={17} strokeWidth={1.7} />
+                Call to book
+              </span>
               <span>{restaurant.phone}</span>
             </a>
             <a
@@ -255,8 +270,11 @@ export default function Home() {
               data-analytics="whatsapp_click"
               className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#466e8b]"
             >
-              <span>Reserve on WhatsApp</span>
-              <span>↗</span>
+              <span className="inline-flex items-center gap-3">
+                <MessageCircle aria-hidden="true" size={17} strokeWidth={1.7} />
+                Reserve on WhatsApp
+              </span>
+              <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} />
             </a>
             <a
               href={restaurant.instagramHref}
@@ -265,8 +283,11 @@ export default function Home() {
               data-analytics="instagram_click"
               className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#466e8b]"
             >
-              <span>Find us on Instagram</span>
-              <span>↗</span>
+              <span className="inline-flex items-center gap-3">
+                <Camera aria-hidden="true" size={17} strokeWidth={1.7} />
+                Find us on Instagram
+              </span>
+              <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} />
             </a>
           </div>
         </section>
@@ -285,10 +306,15 @@ export default function Home() {
             </div>
             <a
               href={restaurant.bookingHref}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Reserve a table on WhatsApp"
               data-analytics="reservation_click"
-              className="inline-flex w-fit rounded-full bg-[#dedcd3] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0e0e0e] transition-transform hover:-translate-y-0.5"
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#dedcd3] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0e0e0e] transition hover:-translate-y-0.5 hover:bg-[#466e8b] hover:text-[#dedcd3]"
             >
-              Reserve via WhatsApp ↗
+              <MessageCircle aria-hidden="true" size={17} strokeWidth={1.8} />
+              <span>Reserve via WhatsApp</span>
+              <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
             </a>
           </div>
         </section>

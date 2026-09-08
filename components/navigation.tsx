@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowUpRight, Menu as MenuIcon, MessageCircle, Utensils } from "lucide-react";
 import { navigationItems, restaurant } from "@/content/restaurant";
 
 export function Navigation() {
@@ -38,18 +39,22 @@ export function Navigation() {
             target="_blank"
             rel="noreferrer"
             data-analytics="menu_click"
-            className="text-[11px] font-medium uppercase tracking-[0.18em] text-black/65 transition-colors hover:text-[#466e8b]"
+            className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-black/65 transition-colors hover:text-[#466e8b]"
           >
-            View menu ↗
+            <span>View menu</span>
+            <ArrowUpRight aria-hidden="true" size={13} strokeWidth={1.8} />
           </a>
           <a
             href={restaurant.bookingHref}
             target="_blank"
             rel="noreferrer"
+            aria-label="Reserve a table on WhatsApp"
             data-analytics="reservation_click"
-            className="rounded-full bg-[#0e0e0e] px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[#466e8b] px-4 py-2.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#dedcd3] shadow-[0_8px_24px_rgb(70_110_139/20%)] transition hover:-translate-y-0.5 hover:bg-[#6d452a]"
           >
-            Reserve via WhatsApp ↗
+            <MessageCircle aria-hidden="true" size={15} strokeWidth={1.8} />
+            <span>Reserve via WhatsApp</span>
+            <ArrowUpRight aria-hidden="true" size={13} strokeWidth={1.8} />
           </a>
         </div>
 
@@ -59,9 +64,10 @@ export function Navigation() {
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsOpen((current) => !current)}
-          className="rounded-full border border-black/15 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] lg:hidden"
+          className="inline-flex items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] lg:hidden"
         >
-          {isOpen ? "Close" : "Explore"}
+          <MenuIcon aria-hidden="true" size={15} strokeWidth={1.8} />
+          <span>{isOpen ? "Close" : "Explore"}</span>
         </button>
       </nav>
 
@@ -88,17 +94,24 @@ export function Navigation() {
               data-analytics="menu_click"
               className="border-b border-black/10 py-3 font-serif text-3xl text-[#466e8b]"
             >
-              View menu ↗
+              <span className="inline-flex items-center gap-2">
+                <Utensils aria-hidden="true" size={18} strokeWidth={1.7} />
+                View menu
+                <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.7} />
+              </span>
             </a>
             <a
               href={restaurant.bookingHref}
               target="_blank"
               rel="noreferrer"
+              aria-label="Reserve a table on WhatsApp"
               onClick={() => setIsOpen(false)}
               data-analytics="reservation_click"
-              className="mt-4 inline-flex w-fit rounded-full bg-[#0e0e0e] px-5 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-white"
+              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#466e8b] px-5 py-3 text-[11px] font-medium uppercase tracking-[0.12em] text-[#dedcd3]"
             >
-              Reserve via WhatsApp ↗
+              <MessageCircle aria-hidden="true" size={16} strokeWidth={1.8} />
+              <span>Reserve via WhatsApp</span>
+              <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
             </a>
           </div>
         </div>
