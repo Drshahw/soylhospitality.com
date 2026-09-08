@@ -39,28 +39,29 @@ export default function Home() {
               <span>Middle Eastern roots.</span>
               <span>Mediterranean curiosity.</span>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 grid w-full max-w-md grid-cols-2 gap-3">
               <a
                 href={restaurant.bookingHref}
                 target="_blank"
                 rel="noreferrer"
                 data-analytics="reservation_click"
                 aria-label="Reserve a table on WhatsApp"
-                className="inline-flex items-center gap-2 rounded-full bg-[#466e8b] px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#dedcd3] shadow-[0_8px_24px_rgb(70_110_139/20%)] transition hover:-translate-y-0.5 hover:bg-[#6d452a]"
+                className="inline-flex min-w-0 items-center justify-center gap-1.5 rounded-full bg-[#466e8b] px-3 py-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#dedcd3] shadow-[0_8px_24px_rgb(70_110_139/20%)] transition hover:-translate-y-0.5 hover:bg-[#6d452a] sm:gap-2 sm:px-5 sm:text-[11px] sm:tracking-[0.12em]"
               >
-                <MessageCircle aria-hidden="true" size={17} strokeWidth={1.8} />
-                <span>Reserve via WhatsApp</span>
-                <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
+                <MessageCircle aria-hidden="true" size={16} strokeWidth={1.8} />
+                <span>Reserve</span>
+                <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.8} />
               </a>
               <a
                 href={restaurant.menuHref}
                 target="_blank"
                 rel="noreferrer"
                 data-analytics="menu_click"
-                className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8 transition-colors hover:text-black"
+                className="inline-flex min-w-0 items-center justify-center gap-1.5 rounded-full border border-[#466e8b]/35 bg-[#dedcd3]/70 px-3 py-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#466e8b] transition hover:-translate-y-0.5 hover:border-[#466e8b] hover:bg-[#466e8b] hover:text-[#dedcd3] sm:gap-2 sm:px-5 sm:text-[11px] sm:tracking-[0.12em]"
               >
+                <Utensils aria-hidden="true" size={16} strokeWidth={1.7} />
                 <span>View menu</span>
-                <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
+                <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.8} />
               </a>
             </div>
           </div>
@@ -326,10 +327,10 @@ export default function Home() {
           <div className="mx-auto flex max-w-[1320px] flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#dedcd3]/55">
-                SOYL · Dubai
+                SOYL · Dubai Design District
               </p>
               <h2 className="max-w-3xl font-serif text-[clamp(3.5rem,8vw,8rem)] leading-[0.82] tracking-[-0.08em]">
-                Come as you are.
+                Come hungry.
                 <br />
                 Stay a little longer.
               </h2>
