@@ -22,7 +22,7 @@ export default function Home() {
       </a>
       <Navigation />
       <div id="main-content">
-        <section className="mx-auto grid min-h-screen max-w-[1440px] items-end gap-8 px-5 pb-10 pt-32 sm:px-10 sm:pb-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:px-16 lg:pt-40">
+        <section className="mx-auto grid max-w-[1440px] gap-8 px-5 pb-10 pt-32 sm:px-10 sm:pb-14 lg:min-h-screen lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-14 lg:px-16 lg:pt-40">
           <div className="flex flex-col justify-end pb-2 lg:pb-12">
             <p className="mb-7 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#466e8b]">
               SOYL · Dubai Design District
@@ -43,7 +43,7 @@ export default function Home() {
                 data-analytics="reservation_click"
                 className="rounded-full bg-[#0e0e0e] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-transform hover:-translate-y-0.5"
               >
-                Book a table ↗
+                Reserve via WhatsApp ↗
               </a>
               <a
                 href={restaurant.menuHref}
@@ -52,11 +52,11 @@ export default function Home() {
                 data-analytics="menu_click"
                 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8 transition-colors hover:text-black"
               >
-                Follow your appetite ↗
+                View menu ↗
               </a>
             </div>
           </div>
-          <div className="relative min-h-[470px] overflow-hidden rounded-[1.5rem] bg-black sm:min-h-[620px] lg:min-h-[720px] lg:rounded-[2rem]">
+          <div className="relative min-h-[350px] overflow-hidden rounded-[1.5rem] bg-black sm:min-h-[620px] lg:min-h-[720px] lg:rounded-[2rem]">
             <img
               src="/images/hero-team.jpeg"
               alt="A smiling SOYL team member holding a freshly prepared dish"
@@ -73,49 +73,51 @@ export default function Home() {
           </div>
         </section>
 
-        <section
-          id="now"
-          className="bg-[#466e8b] px-5 py-20 text-[#dedcd3] sm:px-10 sm:py-28 lg:px-16"
-        >
-          <div className="mx-auto max-w-[1320px]">
-            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-              <div>
-                <div className="mb-8 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#dedcd3]/65">
-                  <span className="text-[#a24a24]">02</span>
-                  <span className="h-px w-8 bg-[#dedcd3]/40" />
-                  <span>Now at SOYL</span>
-                </div>
-                <h2 className="max-w-lg font-serif text-[clamp(3.5rem,7vw,7rem)] leading-[0.86] tracking-[-0.07em]">
-                  Good food.
-                  <br />
-                  No rush.
-                </h2>
-              </div>
-              <div className="grid gap-3 border-t border-[#dedcd3]/30 pt-3">
-                {events.map((event) => (
-                  <div
-                    key={event.title}
-                    className="grid gap-4 border-b border-[#dedcd3]/30 py-5 sm:grid-cols-[0.45fr_1fr_auto] sm:items-end"
-                  >
-                    <span className="text-[11px] uppercase tracking-[0.2em] text-[#dedcd3]/65">
-                      {event.day}
-                    </span>
-                    <div>
-                      <h3 className="font-serif text-3xl leading-none">{event.title}</h3>
-                      <p className="mt-2 text-sm text-[#dedcd3]/70">{event.detail}</p>
-                    </div>
-                    <span className="text-[11px] uppercase tracking-[0.18em] text-[#dedcd3]/75">
-                      {event.time}
-                    </span>
+        {events.length > 0 && (
+          <section
+            id="now"
+            className="bg-[#466e8b] px-5 py-20 text-[#dedcd3] sm:px-10 sm:py-28 lg:px-16"
+          >
+            <div className="mx-auto max-w-[1320px]">
+              <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+                <div>
+                  <div className="mb-8 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#dedcd3]/65">
+                    <span className="text-[#a24a24]">02</span>
+                    <span className="h-px w-8 bg-[#dedcd3]/40" />
+                    <span>Now at SOYL</span>
                   </div>
-                ))}
+                  <h2 className="max-w-lg font-serif text-[clamp(3.5rem,7vw,7rem)] leading-[0.86] tracking-[-0.07em]">
+                    Good food.
+                    <br />
+                    No rush.
+                  </h2>
+                </div>
+                <div className="grid gap-3 border-t border-[#dedcd3]/30 pt-3">
+                  {events.map((event) => (
+                    <div
+                      key={event.title}
+                      className="grid gap-4 border-b border-[#dedcd3]/30 py-5 sm:grid-cols-[0.45fr_1fr_auto] sm:items-end"
+                    >
+                      <span className="text-[11px] uppercase tracking-[0.2em] text-[#dedcd3]/65">
+                        {event.day}
+                      </span>
+                      <div>
+                        <h3 className="font-serif text-3xl leading-none">{event.title}</h3>
+                        <p className="mt-2 text-sm text-[#dedcd3]/70">{event.detail}</p>
+                      </div>
+                      <span className="text-[11px] uppercase tracking-[0.18em] text-[#dedcd3]/75">
+                        {event.time}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section id="food" className="mx-auto max-w-[1440px] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
-          {sectionLabel("03", "From the kitchen")}
+          {sectionLabel("02", "From the kitchen")}
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
             <div>
               <h2 className="max-w-lg font-serif text-[clamp(3.3rem,7vw,7rem)] leading-[0.85] tracking-[-0.08em] text-[#466e8b]">
@@ -164,7 +166,7 @@ export default function Home() {
 
         <section id="space" className="bg-[#f4f1e9] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
           <div className="mx-auto max-w-[1320px]">
-            {sectionLabel("04", "The space")}
+            {sectionLabel("03", "The space")}
             <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
               <div className="lg:sticky lg:top-28">
                 <h2 className="font-serif text-[clamp(3.5rem,7vw,7.5rem)] leading-[0.83] tracking-[-0.08em] text-[#466e8b]">
@@ -219,7 +221,7 @@ export default function Home() {
         >
           {" "}
           <div>
-            {sectionLabel("05", "Come find us")}
+            {sectionLabel("04", "Come find us")}
             <h2 className="max-w-3xl font-serif text-[clamp(4rem,9vw,9rem)] leading-[0.82] tracking-[-0.08em] text-[#466e8b]">
               Your table
               <br />
@@ -245,6 +247,16 @@ export default function Home() {
             >
               <span>Call to book</span>
               <span>{restaurant.phone}</span>
+            </a>
+            <a
+              href={restaurant.whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              data-analytics="whatsapp_click"
+              className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#466e8b]"
+            >
+              <span>Reserve on WhatsApp</span>
+              <span>↗</span>
             </a>
             <a
               href={restaurant.instagramHref}
@@ -276,7 +288,7 @@ export default function Home() {
               data-analytics="reservation_click"
               className="inline-flex w-fit rounded-full bg-[#dedcd3] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0e0e0e] transition-transform hover:-translate-y-0.5"
             >
-              Book a table ↗
+              Reserve via WhatsApp ↗
             </a>
           </div>
         </section>

@@ -1,8 +1,8 @@
-export const events = [
-  {
-    day: "Tonight",
-    title: "Dinner at SOYL",
-    detail: "Good food · Good company · No rush",
-    time: "6 PM → close",
-  },
-] as const;
+export type SoylEvent = {
+  day: string;
+  title: string;
+  detail: string;
+  time: string;
+};
+
+export const events: SoylEvent[] = [];

@@ -40,25 +40,28 @@ export function Navigation() {
             data-analytics="menu_click"
             className="text-[11px] font-medium uppercase tracking-[0.18em] text-black/65 transition-colors hover:text-[#466e8b]"
           >
-            Menu ↗
+            View menu ↗
           </a>
           <a
             href={restaurant.bookingHref}
+            target="_blank"
+            rel="noreferrer"
             data-analytics="reservation_click"
             className="rounded-full bg-[#0e0e0e] px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition-transform hover:-translate-y-0.5"
           >
-            Book a table ↗
+            Reserve via WhatsApp ↗
           </a>
         </div>
 
         <button
           type="button"
+          aria-label="Open navigation"
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsOpen((current) => !current)}
           className="rounded-full border border-black/15 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] lg:hidden"
         >
-          {isOpen ? "Close" : "Menu"}
+          {isOpen ? "Close" : "Explore"}
         </button>
       </nav>
 
@@ -85,15 +88,17 @@ export function Navigation() {
               data-analytics="menu_click"
               className="border-b border-black/10 py-3 font-serif text-3xl text-[#466e8b]"
             >
-              Menu ↗
+              View menu ↗
             </a>
             <a
               href={restaurant.bookingHref}
+              target="_blank"
+              rel="noreferrer"
               onClick={() => setIsOpen(false)}
               data-analytics="reservation_click"
               className="mt-4 inline-flex w-fit rounded-full bg-[#0e0e0e] px-5 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-white"
             >
-              Book a table ↗
+              Reserve via WhatsApp ↗
             </a>
           </div>
         </div>
