@@ -1,0 +1,313 @@
+import { Navigation } from "@/components/navigation";
+import { events } from "@/content/events";
+import { featuredFood } from "@/content/featured-food";
+import { restaurant } from "@/content/restaurant";
+
+const sectionLabel = (number: string, label: string) => (
+  <div className="mb-8 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-black/55">
+    <span className="text-[#a24a24]">{number}</span>
+    <span className="h-px w-8 bg-black/25" />
+    <span>{label}</span>
+  </div>
+);
+
+export default function Home() {
+  return (
+    <main id="top" className="overflow-hidden bg-[#dedcd3]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-black focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+      >
+        Skip to content
+      </a>
+      <Navigation />
+      <div id="main-content">
+        <section className="mx-auto grid min-h-screen max-w-[1440px] items-end gap-8 px-5 pb-10 pt-32 sm:px-10 sm:pb-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:px-16 lg:pt-40">
+          <div className="flex flex-col justify-end pb-2 lg:pb-12">
+            <p className="mb-7 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#466e8b]">
+              SOYL · Dubai Design District
+            </p>
+            <h1 className="max-w-xl font-serif text-[clamp(4.5rem,10vw,9.5rem)] leading-[0.82] tracking-[-0.08em] text-[#466e8b]">
+              Come hungry.
+            </h1>
+            <p className="mt-6 max-w-md font-serif text-[clamp(2rem,4vw,4.1rem)] italic leading-[0.95] tracking-[-0.05em] text-[#466e8b]">
+              Stay a little longer.
+            </p>
+            <div className="mt-9 grid max-w-sm grid-cols-2 gap-5 border-t border-black/20 pt-5 text-[13px] leading-5 text-black/65">
+              <span>Middle Eastern roots.</span>
+              <span>Mediterranean curiosity.</span>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href={restaurant.bookingHref}
+                data-analytics="reservation_click"
+                className="rounded-full bg-[#0e0e0e] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-transform hover:-translate-y-0.5"
+              >
+                Book a table ↗
+              </a>
+              <a
+                href={restaurant.menuHref}
+                target="_blank"
+                rel="noreferrer"
+                data-analytics="menu_click"
+                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8 transition-colors hover:text-black"
+              >
+                Follow your appetite ↗
+              </a>
+            </div>
+          </div>
+          <div className="relative min-h-[470px] overflow-hidden rounded-[1.5rem] bg-black sm:min-h-[620px] lg:min-h-[720px] lg:rounded-[2rem]">
+            <img
+              src="/images/hero-team.jpeg"
+              alt="A smiling SOYL team member holding a freshly prepared dish"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+              fetchPriority="high"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white sm:bottom-7 sm:left-7 sm:right-7">
+              <span className="max-w-[12rem] text-[11px] uppercase leading-4 tracking-[0.18em] text-white/80">
+                Good food. Good company. No rush.
+              </span>
+              <span className="font-serif text-3xl italic">01</span>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="now"
+          className="bg-[#466e8b] px-5 py-20 text-[#dedcd3] sm:px-10 sm:py-28 lg:px-16"
+        >
+          <div className="mx-auto max-w-[1320px]">
+            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+              <div>
+                <div className="mb-8 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#dedcd3]/65">
+                  <span className="text-[#a24a24]">02</span>
+                  <span className="h-px w-8 bg-[#dedcd3]/40" />
+                  <span>Now at SOYL</span>
+                </div>
+                <h2 className="max-w-lg font-serif text-[clamp(3.5rem,7vw,7rem)] leading-[0.86] tracking-[-0.07em]">
+                  Good food.
+                  <br />
+                  No rush.
+                </h2>
+              </div>
+              <div className="grid gap-3 border-t border-[#dedcd3]/30 pt-3">
+                {events.map((event) => (
+                  <div
+                    key={event.title}
+                    className="grid gap-4 border-b border-[#dedcd3]/30 py-5 sm:grid-cols-[0.45fr_1fr_auto] sm:items-end"
+                  >
+                    <span className="text-[11px] uppercase tracking-[0.2em] text-[#dedcd3]/65">
+                      {event.day}
+                    </span>
+                    <div>
+                      <h3 className="font-serif text-3xl leading-none">{event.title}</h3>
+                      <p className="mt-2 text-sm text-[#dedcd3]/70">{event.detail}</p>
+                    </div>
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-[#dedcd3]/75">
+                      {event.time}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="food" className="mx-auto max-w-[1440px] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
+          {sectionLabel("03", "From the kitchen")}
+          <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+            <div>
+              <h2 className="max-w-lg font-serif text-[clamp(3.3rem,7vw,7rem)] leading-[0.85] tracking-[-0.08em] text-[#466e8b]">
+                A little curiosity.
+                <br />A lot of flavour.
+              </h2>
+              <p className="mt-8 max-w-sm text-[15px] leading-6 text-black/65">
+                Middle Eastern roots, a Mediterranean point of view, and a kitchen that likes a
+                little fire.
+              </p>
+              <a
+                href={restaurant.menuHref}
+                target="_blank"
+                rel="noreferrer"
+                data-analytics="menu_click"
+                className="mt-8 inline-block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8"
+              >
+                See the full menu ↗
+              </a>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {featuredFood.map((item) => (
+                <article
+                  key={item.number}
+                  className="group relative min-h-[390px] overflow-hidden rounded-[1.5rem] bg-black text-white sm:min-h-[480px]"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
+                  <div className="absolute inset-x-5 bottom-5 sm:inset-x-7 sm:bottom-7">
+                    <div className="mb-5 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/70">
+                      <span>{item.label}</span>
+                      <span>{item.number}</span>
+                    </div>
+                    <h3 className="font-serif text-4xl leading-none">{item.title}</h3>
+                    <p className="mt-3 max-w-xs text-sm leading-5 text-white/75">{item.text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="space" className="bg-[#f4f1e9] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
+          <div className="mx-auto max-w-[1320px]">
+            {sectionLabel("04", "The space")}
+            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+              <div className="lg:sticky lg:top-28">
+                <h2 className="font-serif text-[clamp(3.5rem,7vw,7.5rem)] leading-[0.83] tracking-[-0.08em] text-[#466e8b]">
+                  A place to
+                  <br />
+                  settle in.
+                </h2>
+                <p className="mt-8 max-w-sm text-[15px] leading-6 text-black/65">
+                  A table to gather around. A space to settle into. Stay for the details.
+                </p>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <figure className="sm:col-span-2">
+                  <img
+                    src="/images/space-dining-room.jpeg"
+                    alt="SOYL dining room with its central olive tree and patterned seating"
+                    className="aspect-[16/10] w-full rounded-[1.5rem] object-cover"
+                  />
+                  <figcaption className="mt-3 flex justify-between text-[10px] uppercase tracking-[0.18em] text-black/50">
+                    <span>Rooted in SOYL</span>
+                    <span>Dubai Design District</span>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="/images/space-olive-tree-night.jpeg"
+                    alt="SOYL's central olive tree beside the open kitchen at night"
+                    className="aspect-[4/5] w-full rounded-[1.5rem] object-cover"
+                  />
+                  <figcaption className="mt-3 text-[10px] uppercase tracking-[0.18em] text-black/50">
+                    Take your time
+                  </figcaption>
+                </figure>
+                <figure className="sm:pt-20">
+                  <img
+                    src="/images/space-lanterns.jpeg"
+                    alt="Decorative lanterns and a traditional coffee service inside SOYL"
+                    className="aspect-[4/5] w-full rounded-[1.5rem] object-cover"
+                  />
+                  <figcaption className="mt-3 text-[10px] uppercase tracking-[0.18em] text-black/50">
+                    Stay for the details
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="visit"
+          className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 sm:px-10 sm:py-36 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-16"
+        >
+          {" "}
+          <div>
+            {sectionLabel("05", "Come find us")}
+            <h2 className="max-w-3xl font-serif text-[clamp(4rem,9vw,9rem)] leading-[0.82] tracking-[-0.08em] text-[#466e8b]">
+              Your table
+              <br />
+              is waiting.
+            </h2>
+            <p className="mt-8 text-base text-black/65">{restaurant.location}</p>
+          </div>
+          <div className="grid gap-3 border-t border-black/20 pt-4 text-sm">
+            <a
+              href={restaurant.mapsHref}
+              target="_blank"
+              rel="noreferrer"
+              data-analytics="directions_click"
+              className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#466e8b]"
+            >
+              <span>Get directions</span>
+              <span>↗</span>
+            </a>
+            <a
+              href={restaurant.phoneHref}
+              data-analytics="call_click"
+              className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#466e8b]"
+            >
+              <span>Call to book</span>
+              <span>{restaurant.phone}</span>
+            </a>
+            <a
+              href={restaurant.instagramHref}
+              target="_blank"
+              rel="noreferrer"
+              data-analytics="instagram_click"
+              className="flex items-center justify-between border-b border-black/15 py-4 transition-colors hover:text-[#466e8b]"
+            >
+              <span>Find us on Instagram</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </section>
+
+        <section className="bg-[#0e0e0e] px-5 py-24 text-[#dedcd3] sm:px-10 sm:py-32 lg:px-16">
+          <div className="mx-auto flex max-w-[1320px] flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#dedcd3]/55">
+                SOYL · Dubai
+              </p>
+              <h2 className="max-w-3xl font-serif text-[clamp(3.5rem,8vw,8rem)] leading-[0.82] tracking-[-0.08em]">
+                Come as you are.
+                <br />
+                Stay a little longer.
+              </h2>
+            </div>
+            <a
+              href={restaurant.bookingHref}
+              data-analytics="reservation_click"
+              className="inline-flex w-fit rounded-full bg-[#dedcd3] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0e0e0e] transition-transform hover:-translate-y-0.5"
+            >
+              Book a table ↗
+            </a>
+          </div>
+        </section>
+
+        <footer className="flex flex-col gap-5 bg-[#0e0e0e] px-5 pb-8 text-[10px] uppercase tracking-[0.18em] text-[#dedcd3]/55 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-16">
+          <span>SOYL · Middle Eastern cuisine</span>
+          <div className="flex gap-5">
+            <a
+              href={restaurant.menuHref}
+              target="_blank"
+              rel="noreferrer"
+              data-analytics="menu_click"
+              className="transition-colors hover:text-[#dedcd3]"
+            >
+              Menu ↗
+            </a>
+            <a
+              href={restaurant.instagramHref}
+              target="_blank"
+              rel="noreferrer"
+              data-analytics="instagram_click"
+              className="transition-colors hover:text-[#dedcd3]"
+            >
+              Instagram ↗
+            </a>
+            <a href="#top" className="transition-colors hover:text-[#dedcd3]">
+              Back to top ↑
+            </a>
+          </div>
+        </footer>
+      </div>
+    </main>
+  );
+}

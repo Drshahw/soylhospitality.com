@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+  --color-background: var(--soyl-cream);
+  --color-foreground: var(--soyl-ink);
+  --color-border: var(--soyl-line);
+  --color-ring: var(--soyl-blue);
+}
+
+:root {
+  --soyl-cream: #dedcd3;
+  --soyl-brown: #6d452a;
+  --soyl-blue: #466e8b;
+  --soyl-orange: #a24a24;
+  --soyl-ink: #0e0e0e;
+  --soyl-white: #ffffff;
+  --soyl-line: rgb(14 14 14 / 16%);
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-display: "Tavira", Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  background: var(--soyl-cream);
+}
+body {
+  margin: 0;
+  background: var(--soyl-cream);
+  color: var(--soyl-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+a {
+  color: inherit;
+}
+::selection {
+  background: var(--soyl-blue);
+  color: var(--soyl-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
