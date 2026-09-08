@@ -21,7 +21,7 @@
   --soyl-ink: #0e0e0e;
   --soyl-white: #ffffff;
   --soyl-line: rgb(14 14 14 / 16%);
-  --font-body: Arial, Helvetica, sans-serif;
+  --font-body: "Avenir Next", Avenir, "Gill Sans", "Helvetica Neue", Arial, sans-serif;
   --font-display: "Tavira", Georgia, "Times New Roman", serif;
 }
 
