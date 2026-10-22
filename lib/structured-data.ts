@@ -37,7 +37,22 @@ export const structuredData = {
         longitude: 55.2980625,
       },
       priceRange: "AED 50–100",
-      // TODO: add openingHoursSpecification once confirmed by owner
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: restaurant.hours.opens,
+          closes: restaurant.hours.closes,
+        },
+      ],
     },
     {
       "@type": "WebSite",
