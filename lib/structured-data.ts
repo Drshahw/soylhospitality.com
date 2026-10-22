@@ -1,4 +1,5 @@
 import { restaurant } from "@/content/restaurant";
+import type { MenuSection } from "@/lib/qlub-menu";
 
 const siteUrl = "https://soylhospitality.com";
 
@@ -26,7 +27,7 @@ export const structuredData = {
         addressRegion: "Dubai",
         addressCountry: "AE",
       },
-      hasMenu: restaurant.menuHref,
+      hasMenu: `${siteUrl}/menu`,
       acceptsReservations: true,
       image: images,
       sameAs: [restaurant.instagramHref, restaurant.mapsHref],
@@ -50,4 +51,28 @@ export const structuredData = {
 
 export function structuredDataJson(): string {
   return JSON.stringify(structuredData).replace(/</g, "\\u003c");
+}
+
+export function menuStructuredDataJson(sections: MenuSection[]): string {
+  const menu = {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    "@id": `${siteUrl}/menu#menu`,
+    name: "SOYL Menu",
+    url: `${siteUrl}/menu`,
+    inLanguage: "en",
+    mainEntityOfPage: `${siteUrl}/menu`,
+    hasMenuSection: sections.map((section) => ({
+      "@type": "MenuSection",
+      name: section.name,
+      hasMenuItem: section.items.map((item) => ({
+        "@type": "MenuItem",
+        name: item.name,
+        ...(item.description && { description: item.description }),
+        ...(item.image && { image: item.image }),
+        offers: { "@type": "Offer", price: item.price, priceCurrency: "AED" },
+      })),
+    })),
+  };
+  return JSON.stringify(menu).replace(/</g, "\\u003c");
 }

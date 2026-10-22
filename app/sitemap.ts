@@ -7,7 +7,10 @@ const routes: {
   path: string;
   changeFrequency: NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
   priority: number;
-}[] = [{ path: "/", changeFrequency: "monthly", priority: 1 }];
+}[] = [
+  { path: "/", changeFrequency: "monthly", priority: 1 },
+  { path: "/menu", changeFrequency: "daily", priority: 0.9 },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

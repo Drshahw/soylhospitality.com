@@ -2,6 +2,7 @@ import { Navigation } from "@/components/navigation";
 import { events } from "@/content/events";
 import { featuredFood } from "@/content/featured-food";
 import { restaurant } from "@/content/restaurant";
+import { guestReviews, reviewSummary } from "@/content/reviews";
 import { ArrowUpRight, Camera, MapPin, MessageCircle, Phone, Star, Utensils } from "lucide-react";
 import Image from "next/image";
 
@@ -53,9 +54,7 @@ export default function Home() {
                 <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.8} />
               </a>
               <a
-                href={restaurant.menuHref}
-                target="_blank"
-                rel="noreferrer"
+                href={restaurant.menuPageHref}
                 data-analytics="menu_click"
                 className="inline-flex min-w-0 items-center justify-center gap-1.5 rounded-full border border-[#466e8b]/35 bg-[#dedcd3]/70 px-3 py-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#466e8b] transition hover:-translate-y-0.5 hover:border-[#466e8b] hover:bg-[#466e8b] hover:text-[#dedcd3] sm:gap-2 sm:px-5 sm:text-[11px] sm:tracking-[0.12em]"
               >
@@ -140,9 +139,7 @@ export default function Home() {
                 little fire.
               </p>
               <a
-                href={restaurant.menuHref}
-                target="_blank"
-                rel="noreferrer"
+                href={restaurant.menuPageHref}
                 data-analytics="menu_click"
                 className="mt-8 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8"
               >
@@ -236,13 +233,89 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="reviews" className="mx-auto max-w-[1440px] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
+          {sectionLabel("04", "What guests say")}
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <h2 className="max-w-lg font-serif text-[clamp(3.3rem,7vw,7rem)] leading-[0.85] tracking-[-0.08em] text-[#466e8b]">
+              Worth the
+              <br />
+              second visit.
+            </h2>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-black/65 lg:justify-end">
+              <a
+                href={restaurant.mapsHref}
+                target="_blank"
+                rel="noreferrer"
+                data-analytics="reviews_click"
+                className="inline-flex items-center gap-2 transition-colors hover:text-[#466e8b]"
+              >
+                <Star
+                  aria-hidden="true"
+                  className="text-[#a24a24]"
+                  fill="currentColor"
+                  size={17}
+                  strokeWidth={1.7}
+                />
+                <span>
+                  <strong className="font-semibold text-black/85">{reviewSummary.rating}</strong> ·{" "}
+                  {reviewSummary.count} Google reviews
+                </span>
+                <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
+              </a>
+              <a
+                href={restaurant.reviewHref}
+                target="_blank"
+                rel="noreferrer"
+                data-analytics="review_click"
+                className="inline-flex items-center gap-2 rounded-full border border-[#466e8b]/35 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#466e8b] transition hover:border-[#466e8b] hover:bg-[#466e8b] hover:text-[#dedcd3]"
+              >
+                <span>Leave a review</span>
+                <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.8} />
+              </a>
+            </div>
+          </div>
+          <ul className="-mx-5 mt-12 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-3">
+            {guestReviews.map((review) => (
+              <li
+                key={review.author}
+                className="flex w-[82%] shrink-0 snap-start flex-col justify-between rounded-[1.5rem] bg-[#f4f1e9] p-6 sm:w-auto sm:p-8"
+              >
+                <figure>
+                  <div
+                    role="img"
+                    aria-label="Rated 5 out of 5"
+                    className="mb-5 flex gap-1 text-[#a24a24]"
+                  >
+                    {Array.from({ length: 5 }, (_, index) => (
+                      <Star
+                        key={index}
+                        aria-hidden="true"
+                        fill="currentColor"
+                        size={13}
+                        strokeWidth={1.7}
+                      />
+                    ))}
+                  </div>
+                  <blockquote className="font-serif text-2xl leading-[1.15] tracking-[-0.02em] text-black/85">
+                    “{review.quote}”
+                  </blockquote>
+                  <figcaption className="mt-6 flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.18em] text-black/50">
+                    <span>{review.author} · via Google</span>
+                    <span className="text-[#466e8b]">{review.dish}</span>
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <section
           id="visit"
           className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 sm:px-10 sm:py-36 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-16"
         >
           {" "}
           <div>
-            {sectionLabel("04", "Come find us")}
+            {sectionLabel("05", "Come find us")}
             <h2 className="max-w-3xl font-serif text-[clamp(4rem,9vw,9rem)] leading-[0.82] tracking-[-0.08em] text-[#466e8b]">
               Your table
               <br />
@@ -354,13 +427,11 @@ export default function Home() {
           <span>SOYL · Middle Eastern cuisine</span>
           <div className="flex gap-5">
             <a
-              href={restaurant.menuHref}
-              target="_blank"
-              rel="noreferrer"
+              href={restaurant.menuPageHref}
               data-analytics="menu_click"
               className="transition-colors hover:text-[#dedcd3]"
             >
-              Menu ↗
+              Menu
             </a>
             <a
               href={restaurant.instagramHref}

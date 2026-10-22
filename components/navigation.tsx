@@ -11,7 +11,7 @@ export function Navigation() {
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-8 lg:px-12 lg:pt-6">
       <nav className="mx-auto flex max-w-[1440px] items-center justify-between rounded-full border border-black/10 bg-[#dedcd3]/90 px-4 py-3 shadow-[0_12px_40px_rgb(14_14_14/6%)] backdrop-blur-md sm:px-6">
         <a
-          href="#top"
+          href="/"
           aria-label="SOYL home"
           onClick={() => setIsOpen(false)}
           className="group flex items-center gap-2"
@@ -35,9 +35,7 @@ export function Navigation() {
             </a>
           ))}
           <a
-            href={restaurant.menuHref}
-            target="_blank"
-            rel="noreferrer"
+            href={restaurant.menuPageHref}
             data-analytics="menu_click"
             className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-black/65 transition-colors hover:text-[#466e8b]"
           >
@@ -88,9 +86,7 @@ export function Navigation() {
               </a>
             ))}
             <a
-              href={restaurant.menuHref}
-              target="_blank"
-              rel="noreferrer"
+              href={restaurant.menuPageHref}
               data-analytics="menu_click"
               className="border-b border-black/10 py-3 font-serif text-3xl text-[#466e8b]"
             >

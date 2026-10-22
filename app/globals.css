@@ -40,8 +40,11 @@ body {
   font-size: 16px;
   line-height: 1.5;
 }
-a {
-  color: inherit;
+/* Layered so Tailwind text-* utilities on links can override it. */
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 ::selection {
   background: var(--soyl-blue);

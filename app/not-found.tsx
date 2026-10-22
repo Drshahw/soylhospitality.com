@@ -31,9 +31,7 @@ export default function NotFound() {
             <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.8} />
           </Link>
           <a
-            href={restaurant.menuHref}
-            target="_blank"
-            rel="noreferrer"
+            href={restaurant.menuPageHref}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-[#466e8b]/35 bg-[#dedcd3]/70 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#466e8b] transition hover:-translate-y-0.5 hover:border-[#466e8b] hover:bg-[#466e8b] hover:text-[#dedcd3]"
           >
             <Utensils aria-hidden="true" size={16} strokeWidth={1.7} />
