@@ -16,3 +16,13 @@ export const featuredFood = [
     alt: "Coffee served with SOYL lettering in the foam",
   },
 ] as const;
+
+// Dish names people search for; anchors match section ids on /menu.
+export const signatureDishes = [
+  { name: "Soyl Koobideh Kabab", note: "Lamb & beef, saffron rice", href: "/menu#persian-grill" },
+  { name: "Soyl Torsh Kabab", note: "Pomegranate & walnut", href: "/menu#persian-grill" },
+  { name: "Joojeh Masti", note: "Yogurt-marinated chicken", href: "/menu#persian-grill" },
+  { name: "Kashk-e Bademjan", note: "Smoky eggplant, kashk", href: "/menu#hot-appetizers" },
+  { name: "Mirza Ghasemi", note: "Fire-roasted eggplant", href: "/menu#hot-appetizers" },
+  { name: "Kunafa on Fire", note: "Our signature dessert", href: "/menu#desserts" },
+] as const;

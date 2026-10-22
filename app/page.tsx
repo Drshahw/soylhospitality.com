@@ -1,6 +1,6 @@
 import { Navigation } from "@/components/navigation";
 import { events } from "@/content/events";
-import { featuredFood } from "@/content/featured-food";
+import { featuredFood, signatureDishes } from "@/content/featured-food";
 import { restaurant } from "@/content/restaurant";
 import { guestReviews, reviewSummary } from "@/content/reviews";
 import { ArrowUpRight, Camera, MapPin, MessageCircle, Phone, Star, Utensils } from "lucide-react";
@@ -37,8 +37,8 @@ export default function Home() {
               Stay a little longer.
             </p>
             <div className="mt-9 grid max-w-sm grid-cols-2 gap-5 border-t border-black/20 pt-5 text-[13px] leading-5 text-black/65">
-              <span>Middle Eastern roots.</span>
-              <span>Mediterranean curiosity.</span>
+              <span>Persian roots.</span>
+              <span>Lebanese warmth.</span>
             </div>
             <div className="mt-8 grid w-full max-w-md grid-cols-2 gap-3">
               <a
@@ -135,9 +135,23 @@ export default function Home() {
                 <br />A lot of flavour.
               </h2>
               <p className="mt-8 max-w-sm text-[15px] leading-6 text-black/65">
-                Middle Eastern roots, a Mediterranean point of view, and a kitchen that likes a
-                little fire.
+                Persian grill and Lebanese classics, from a kitchen that likes a little fire.
               </p>
+              <ul className="mt-8 grid max-w-sm border-t border-black/20">
+                {signatureDishes.map((dish) => (
+                  <li key={dish.name}>
+                    <a
+                      href={dish.href}
+                      className="flex items-baseline justify-between gap-4 border-b border-black/15 py-3 transition-colors hover:text-[#466e8b]"
+                    >
+                      <span className="font-serif text-xl leading-tight">{dish.name}</span>
+                      <span className="shrink-0 text-[10px] uppercase tracking-[0.16em] text-black/50">
+                        {dish.note}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
               <a
                 href={restaurant.menuPageHref}
                 data-analytics="menu_click"
@@ -424,7 +438,7 @@ export default function Home() {
         </section>
 
         <footer className="flex flex-col gap-5 bg-[#0e0e0e] px-5 pb-8 text-[10px] uppercase tracking-[0.18em] text-[#dedcd3]/55 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-16">
-          <span>SOYL · Middle Eastern cuisine</span>
+          <span>SOYL · Persian &amp; Lebanese cuisine</span>
           <div className="flex gap-5">
             <a
               href={restaurant.menuPageHref}

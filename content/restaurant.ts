@@ -1,6 +1,6 @@
 export const restaurant = {
   name: "SOYL",
-  descriptor: "Middle Eastern cuisine",
+  descriptor: "Persian & Lebanese cuisine",
   location: "Dubai Design District, Dubai",
   phone: "+971 4 244 1331",
   phoneHref: "tel:+97142441331",

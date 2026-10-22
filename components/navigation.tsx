@@ -20,7 +20,7 @@ export function Navigation() {
             SOYL
           </span>
           <span className="hidden border-l border-black/20 pl-2 text-[9px] uppercase tracking-[0.18em] text-black/55 sm:inline">
-            Middle Eastern cuisine
+            Persian &amp; Lebanese
           </span>
         </a>
 
