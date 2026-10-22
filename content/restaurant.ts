@@ -6,6 +6,7 @@ export const restaurant = {
   // Confirmed by owner; matches the Google Business Profile.
   hours: { days: "Every day", opens: "11:30", closes: "22:00", display: "11:30 AM – 10:00 PM" },
   visitPageHref: "/visit",
+  offersPageHref: "/offers",
   phone: "+971 4 244 1331",
   phoneHref: "tel:+97142441331",
   whatsappHref:
@@ -22,6 +23,7 @@ export const restaurant = {
 
 export const navigationItems = [
   { label: "Food", href: "/#food" },
-  { label: "Space", href: "/#space" },
+  { label: "Offers", href: "/offers" },
   { label: "Visit", href: "/visit" },
+  { label: "Journal", href: "/journal" },
 ] as const;

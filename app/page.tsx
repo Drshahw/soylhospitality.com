@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/navigation";
 import { events } from "@/content/events";
-import { featuredFood, signatureDishes } from "@/content/featured-food";
+import { featuredFood, signatureGroups } from "@/content/featured-food";
+import { offers } from "@/content/offers";
 import { restaurant } from "@/content/restaurant";
 import { guestReviews, reviewSummary } from "@/content/reviews";
 import { loadMenu } from "@/lib/qlub-menu";
@@ -20,10 +21,13 @@ export const revalidate = 3600;
 
 export default async function Home() {
   const menuItems = (await loadMenu())?.flatMap((section) => section.items) ?? [];
-  const signatures = signatureDishes.map((dish) => {
-    const item = menuItems.find((entry) => dish.match.test(entry.name));
-    return { ...dish, photo: item?.photo, price: item?.price };
-  });
+  const signatures = signatureGroups.map((group) => ({
+    title: group.title,
+    dishes: group.dishes.map((dish) => {
+      const item = menuItems.find((entry) => dish.match.test(entry.name));
+      return { ...dish, photo: item?.photo, price: item?.price };
+    }),
+  }));
 
   return (
     <main id="top" className="overflow-hidden bg-[#dedcd3]">
@@ -136,6 +140,35 @@ export default async function Home() {
           </section>
         )}
 
+        {offers.map((offer) => (
+          <a
+            key={offer.id}
+            href={`${restaurant.offersPageHref}#${offer.id}`}
+            data-analytics="offer_click"
+            className="group mx-auto mb-4 flex max-w-[1440px] flex-col gap-4 px-5 sm:px-10 lg:px-16"
+          >
+            <div className="flex flex-col gap-4 rounded-[1.5rem] bg-[#0e0e0e] px-6 py-6 text-[#dedcd3] transition sm:flex-row sm:items-center sm:justify-between sm:px-8 group-hover:bg-[#1a1a1a]">
+              <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#a24a24]">
+                  {offer.label}
+                </span>
+                <span className="font-serif text-2xl leading-tight sm:text-3xl">
+                  {offer.items.map((item) => item.name).join(" · ")}
+                </span>
+              </div>
+              <div className="flex shrink-0 items-center gap-5 whitespace-nowrap text-[11px] uppercase tracking-[0.16em] text-[#dedcd3]/70">
+                <span>
+                  {offer.days}, {offer.time}
+                </span>
+                <span className="font-serif text-2xl normal-case tracking-normal text-[#dedcd3]">
+                  AED {offer.price}
+                </span>
+                <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} />
+              </div>
+            </div>
+          </a>
+        ))}
+
         <section id="food" className="mx-auto max-w-[1440px] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
           {sectionLabel("02", "From the kitchen")}
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -145,7 +178,7 @@ export default async function Home() {
                 <br />A lot of flavour.
               </h2>
               <p className="mt-8 max-w-md text-[15px] leading-6 text-black/65">
-                Persian grill and Lebanese classics, from a kitchen that likes a little fire. Start
+                Persian grills and Lebanese favourites, from a kitchen that likes a little fire. Start
                 with the dishes our guests come back for.
               </p>
             </div>
@@ -159,34 +192,42 @@ export default async function Home() {
               <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
             </a>
           </div>
-          <ul className="-mx-5 mt-12 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-3">
-            {signatures.map((dish) => (
-              <li key={dish.name} className="w-[78%] shrink-0 snap-start sm:w-auto">
-                <a
-                  href={dish.href}
-                  className="group relative block aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#0e0e0e] text-white"
-                >
-                  {dish.photo && (
-                    <Image
-                      src={dish.photo}
-                      alt={`${dish.name} at SOYL`}
-                      fill
-                      sizes="(max-width: 639px) 78vw, (max-width: 1023px) 50vw, 33vw"
-                      className="object-cover transition duration-700 group-hover:scale-105"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-                  <div className="absolute inset-x-5 bottom-5 sm:inset-x-6 sm:bottom-6">
-                    <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/75">
-                      <span>{dish.note}</span>
-                      {dish.price !== undefined && <span>AED {dish.price}</span>}
-                    </div>
-                    <h3 className="font-serif text-3xl leading-none sm:text-4xl">{dish.name}</h3>
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
+          {signatures.map((group) => (
+            <div key={group.title} className="mt-14">
+              <h3 className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-black/55">
+                <span className="h-px w-8 bg-black/25" />
+                {group.title}
+              </h3>
+              <ul className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0">
+                {group.dishes.map((dish) => (
+                  <li key={dish.name} className="w-[78%] shrink-0 snap-start sm:w-auto">
+                    <a
+                      href={dish.href}
+                      className="group relative block aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#0e0e0e] text-white"
+                    >
+                      {dish.photo && (
+                        <Image
+                          src={dish.photo}
+                          alt={`${dish.name} at SOYL`}
+                          fill
+                          sizes="(max-width: 639px) 78vw, 33vw"
+                          className="object-cover transition duration-700 group-hover:scale-105"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                      <div className="absolute inset-x-5 bottom-5 sm:inset-x-6 sm:bottom-6">
+                        <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/75">
+                          <span>{dish.note}</span>
+                          {dish.price !== undefined && <span>AED {dish.price}</span>}
+                        </div>
+                        <h4 className="font-serif text-3xl leading-none sm:text-4xl">{dish.name}</h4>
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </section>
 
         <section id="space" className="bg-[#f4f1e9] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
