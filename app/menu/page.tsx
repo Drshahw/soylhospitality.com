@@ -1,6 +1,6 @@
 import { Navigation } from "@/components/navigation";
 import { restaurant } from "@/content/restaurant";
-import { getMenu, type MenuSection } from "@/lib/qlub-menu";
+import { loadMenu } from "@/lib/qlub-menu";
 import { menuStructuredDataJson } from "@/lib/structured-data";
 import { ArrowUpRight, MessageCircle, Utensils } from "lucide-react";
 import type { Metadata } from "next";
@@ -16,20 +16,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/menu" },
   openGraph: { url: "/menu" },
 };
-
-async function loadMenu(): Promise<MenuSection[] | null> {
-  try {
-    return await getMenu();
-  } catch (error) {
-    // Never fail a deploy because Qlub is down; at runtime, rethrow so ISR
-    // keeps serving the last good version of the page instead.
-    if (process.env.NEXT_PHASE === "phase-production-build") {
-      console.error(error);
-      return null;
-    }
-    throw error;
-  }
-}
 
 const formatPrice = (price: number) =>
   `AED ${Number.isInteger(price) ? price : price.toFixed(2)}`;

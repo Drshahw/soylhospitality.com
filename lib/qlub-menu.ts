@@ -11,6 +11,7 @@ export type MenuItem = {
   description: string;
   price: number;
   image?: string;
+  photo?: string;
 };
 
 export type MenuSection = {
@@ -71,6 +72,7 @@ async function getCategoryItems(menuId: string, categoryId: string): Promise<Men
         description: tidy(product.description),
         price: product.price,
         image: product.coverMedia?.thumbnail?.url || product.coverMedia?.originalFile || undefined,
+        photo: product.coverMedia?.originalFile || product.coverMedia?.thumbnail?.url || undefined,
       });
     }
 
@@ -95,4 +97,18 @@ export async function getMenu(): Promise<MenuSection[]> {
   );
 
   return sections.filter((section) => section.items.length > 0);
+}
+
+// For pages: never fail a deploy because Qlub is down (return null at build
+// time); at runtime, rethrow so ISR keeps serving the last good version.
+export async function loadMenu(): Promise<MenuSection[] | null> {
+  try {
+    return await getMenu();
+  } catch (error) {
+    if (process.env.NEXT_PHASE === "phase-production-build") {
+      console.error(error);
+      return null;
+    }
+    throw error;
+  }
 }

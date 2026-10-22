@@ -10,6 +10,7 @@ const routes: {
 }[] = [
   { path: "/", changeFrequency: "monthly", priority: 1 },
   { path: "/menu", changeFrequency: "daily", priority: 0.9 },
+  { path: "/visit", changeFrequency: "monthly", priority: 0.8 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -76,3 +76,16 @@ export function menuStructuredDataJson(sections: MenuSection[]): string {
   };
   return JSON.stringify(menu).replace(/</g, "\\u003c");
 }
+
+export function faqStructuredDataJson(faqs: readonly { question: string; answer: string }[]): string {
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((entry) => ({
+      "@type": "Question",
+      name: entry.question,
+      acceptedAnswer: { "@type": "Answer", text: entry.answer },
+    })),
+  };
+  return JSON.stringify(faq).replace(/</g, "\\u003c");
+}

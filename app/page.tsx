@@ -3,6 +3,7 @@ import { events } from "@/content/events";
 import { featuredFood, signatureDishes } from "@/content/featured-food";
 import { restaurant } from "@/content/restaurant";
 import { guestReviews, reviewSummary } from "@/content/reviews";
+import { loadMenu } from "@/lib/qlub-menu";
 import { ArrowUpRight, Camera, MapPin, MessageCircle, Phone, Star, Utensils } from "lucide-react";
 import Image from "next/image";
 
@@ -14,7 +15,16 @@ const sectionLabel = (number: string, label: string) => (
   </div>
 );
 
-export default function Home() {
+// Signature dish photos and prices come from the live Qlub menu.
+export const revalidate = 3600;
+
+export default async function Home() {
+  const menuItems = (await loadMenu())?.flatMap((section) => section.items) ?? [];
+  const signatures = signatureDishes.map((dish) => {
+    const item = menuItems.find((entry) => dish.match.test(entry.name));
+    return { ...dish, photo: item?.photo, price: item?.price };
+  });
+
   return (
     <main id="top" className="overflow-hidden bg-[#dedcd3]">
       <a
@@ -128,66 +138,55 @@ export default function Home() {
 
         <section id="food" className="mx-auto max-w-[1440px] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
           {sectionLabel("02", "From the kitchen")}
-          <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <h2 className="max-w-lg font-serif text-[clamp(3.3rem,7vw,7rem)] leading-[0.85] tracking-[-0.08em] text-[#466e8b]">
+              <h2 className="max-w-3xl font-serif text-[clamp(3.3rem,7vw,7rem)] leading-[0.85] tracking-[-0.08em] text-[#466e8b]">
                 A little curiosity.
                 <br />A lot of flavour.
               </h2>
-              <p className="mt-8 max-w-sm text-[15px] leading-6 text-black/65">
-                Persian grill and Lebanese classics, from a kitchen that likes a little fire.
+              <p className="mt-8 max-w-md text-[15px] leading-6 text-black/65">
+                Persian grill and Lebanese classics, from a kitchen that likes a little fire. Start
+                with the dishes our guests come back for.
               </p>
-              <ul className="mt-8 grid max-w-sm border-t border-black/20">
-                {signatureDishes.map((dish) => (
-                  <li key={dish.name}>
-                    <a
-                      href={dish.href}
-                      className="flex items-baseline justify-between gap-4 border-b border-black/15 py-3 transition-colors hover:text-[#466e8b]"
-                    >
-                      <span className="font-serif text-xl leading-tight">{dish.name}</span>
-                      <span className="shrink-0 text-[10px] uppercase tracking-[0.16em] text-black/50">
-                        {dish.note}
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={restaurant.menuPageHref}
-                data-analytics="menu_click"
-                className="mt-8 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8"
-              >
-                <Utensils aria-hidden="true" size={15} strokeWidth={1.7} />
-                <span>See the full menu</span>
-                <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
-              </a>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {featuredFood.map((item) => (
-                <article
-                  key={item.number}
-                  className="group relative min-h-[390px] overflow-hidden rounded-[1.5rem] bg-black text-white sm:min-h-[480px]"
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    fill
-                    sizes="(max-width: 639px) 100vw, 50vw"
-                    className="object-cover transition duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
-                  <div className="absolute inset-x-5 bottom-5 sm:inset-x-7 sm:bottom-7">
-                    <div className="mb-5 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/70">
-                      <span>{item.label}</span>
-                      <span>{item.number}</span>
-                    </div>
-                    <h3 className="font-serif text-4xl leading-none">{item.title}</h3>
-                    <p className="mt-3 max-w-xs text-sm leading-5 text-white/75">{item.text}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <a
+              href={restaurant.menuPageHref}
+              data-analytics="menu_click"
+              className="inline-flex w-fit items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8"
+            >
+              <Utensils aria-hidden="true" size={15} strokeWidth={1.7} />
+              <span>See the full menu</span>
+              <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
+            </a>
           </div>
+          <ul className="-mx-5 mt-12 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-3">
+            {signatures.map((dish) => (
+              <li key={dish.name} className="w-[78%] shrink-0 snap-start sm:w-auto">
+                <a
+                  href={dish.href}
+                  className="group relative block aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#0e0e0e] text-white"
+                >
+                  {dish.photo && (
+                    <Image
+                      src={dish.photo}
+                      alt={`${dish.name} at SOYL`}
+                      fill
+                      sizes="(max-width: 639px) 78vw, (max-width: 1023px) 50vw, 33vw"
+                      className="object-cover transition duration-700 group-hover:scale-105"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                  <div className="absolute inset-x-5 bottom-5 sm:inset-x-6 sm:bottom-6">
+                    <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/75">
+                      <span>{dish.note}</span>
+                      {dish.price !== undefined && <span>AED {dish.price}</span>}
+                    </div>
+                    <h3 className="font-serif text-3xl leading-none sm:text-4xl">{dish.name}</h3>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section id="space" className="bg-[#f4f1e9] px-5 py-24 sm:px-10 sm:py-36 lg:px-16">
@@ -242,6 +241,29 @@ export default function Home() {
                     Stay for the details
                   </figcaption>
                 </figure>
+                {featuredFood.map((item) => (
+                  <article
+                    key={item.number}
+                    className="group relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-black text-white"
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      sizes="(max-width: 639px) 100vw, 50vw"
+                      className="object-cover transition duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
+                    <div className="absolute inset-x-5 bottom-5 sm:inset-x-7 sm:bottom-7">
+                      <div className="mb-5 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/70">
+                        <span>{item.label}</span>
+                        <span>{item.number}</span>
+                      </div>
+                      <h3 className="font-serif text-4xl leading-none">{item.title}</h3>
+                      <p className="mt-3 max-w-xs text-sm leading-5 text-white/75">{item.text}</p>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
@@ -335,7 +357,17 @@ export default function Home() {
               <br />
               is waiting.
             </h2>
-            <p className="mt-8 text-base text-black/65">{restaurant.location}</p>
+            <p className="mt-8 text-base text-black/65">{restaurant.address}</p>
+            <p className="mt-1 text-base text-black/65">
+              {restaurant.hours.days}, {restaurant.hours.display} · 100% halal
+            </p>
+            <a
+              href={restaurant.visitPageHref}
+              className="mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#466e8b] underline decoration-[#466e8b]/40 underline-offset-8"
+            >
+              <span>Parking, map &amp; FAQ</span>
+              <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} />
+            </a>
           </div>
           <div className="grid gap-3 border-t border-black/20 pt-4 text-sm">
             <a
