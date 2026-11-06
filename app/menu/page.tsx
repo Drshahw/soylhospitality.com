@@ -124,6 +124,7 @@ export default async function MenuPage() {
                             alt={item.name}
                             fill
                             sizes="80px"
+                            unoptimized
                             className="object-cover"
                           />
                         </div>
